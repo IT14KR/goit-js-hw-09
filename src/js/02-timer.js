@@ -7,22 +7,18 @@ const refs = {
   hours: document.querySelector('.js-hours'),
   minutes: document.querySelector('.js-minutes'),
   seconds: document.querySelector('.js-seconds'),
+  'datetime-picker': document.querySelector('#datetime-picker'),
 };
 
 function convertMs(ms) {
-  // Number of milliseconds per unit of time
   const second = 1000;
   const minute = second * 60;
   const hour = minute * 60;
   const day = hour * 24;
 
-  // Remaining days
   const days = Math.floor(ms / day);
-  // Remaining hours
   const hours = Math.floor((ms % day) / hour);
-  // Remaining minutes
   const minutes = Math.floor(((ms % day) % hour) / minute);
-  // Remaining seconds
   const seconds = Math.floor((((ms % day) % hour) % minute) / second);
 
   return { days, hours, minutes, seconds };
@@ -33,9 +29,10 @@ function addLeadingZero(value) {
 }
 
 refs.startBtn.addEventListener('click', () => {
-  const chosenDate = new Date(flatpickr.parseDate(datetimePicker.value));
+  const chosenDate = new Date(flatpickr.parseDate(refs.datetimePicker.value));
+
   const currentDate = new Date();
-  const timeLeft = chosenDate - currentDate;
+  let timeLeft = chosenDate - currentDate;
 
   let intervalId = setInterval(() => {
     const { days, hours, minutes, seconds } = convertMs(timeLeft);
