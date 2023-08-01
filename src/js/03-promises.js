@@ -6,13 +6,15 @@ const refs = {
 };
 
 function createPromise(position, delay) {
+  const shouldResolve = Math.random() > 0.3;
   return new Promise((resolve, reject) => {
-    const shouldResolve = Math.random() > 0.3;
-    if (shouldResolve) {
-      resolve({ position, delay });
-    } else {
-      reject({ position, delay });
-    }
+    setInterval(() => {
+      if (shouldResolve) {
+        resolve({ position, delay });
+      } else {
+        reject({ position, delay });
+      }
+    }, delay);
   });
 }
 
@@ -35,5 +37,6 @@ refs.form.addEventListener('submit', e => {
         console.log(`❌ Rejected promise ${position} in ${delay}ms`);
       });
 
-    
+    delay + step;
+  }
 });
