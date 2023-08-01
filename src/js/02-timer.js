@@ -61,7 +61,7 @@ refs.startButton.addEventListener('click', () => {
   const currentDate = Date.now();
   const diff = TIME_DEDLINE - currentDate;
 
-  if (diff < 0) {
+  if (diff < 1000) {
     alert('Congratulations!');
     return;
   }
